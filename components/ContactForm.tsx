@@ -19,7 +19,7 @@ export default function ContactForm() {
       `Name: ${name}\nEmail: ${email}\n\n${message}`
     );
 
-    window.location.href = `mailto:hello@example.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:yyyy.merr.fam42910@gmail.com?subject=${subject}&body=${body}`;
     setStatus("sent");
   };
 
@@ -63,7 +63,7 @@ export default function ContactForm() {
         <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
       </button>
       <p className="text-xs text-muted">
-        メールクライアントが開かない場合は hello@example.com へ直接ご連絡ください。
+        メールクライアントが開かない場合は yyyy.merr.fam42910@gmail.com へ直接ご連絡ください。
       </p>
     </form>
   );
