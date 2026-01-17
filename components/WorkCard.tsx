@@ -1,9 +1,15 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
+import { useRef } from 'react';
 
 export type WorkCardProps = {
   title: string;
@@ -25,17 +31,20 @@ export default function WorkCard({
   coverImage,
   outcome,
   tags,
-  className = "",
-  enableMotion = false
+  className = '',
+  enableMotion = false,
 }: WorkCardProps) {
   const cardRef = useRef<HTMLAnchorElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const isInView = useInView(cardRef, { margin: "-30% 0px -30% 0px", amount: 0.4 });
+  const isInView = useInView(cardRef, {
+    margin: '-30% 0px -30% 0px',
+    amount: 0.4,
+  });
 
   const { scrollYProgress } = useScroll({
     target: imageRef,
-    offset: ["start end", "end start"]
+    offset: ['start end', 'end start'],
   });
   const parallaxY = useTransform(scrollYProgress, [0, 1], [12, -12]);
 
@@ -53,16 +62,16 @@ export default function WorkCard({
       <motion.div
         className="relative"
         animate={{ opacity: cardOpacity }}
-        transition={{ duration: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
       >
-        <div className="relative overflow-hidden bg-border">
+        <div className="relative overflow-hidden bg-muted/5">
           <motion.div
             ref={imageRef}
             className="relative aspect-[4/3] w-full"
             style={{ y: imageY }}
             animate={{ scale: imageScale }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            whileHover={motionEnabled ? { scale: 1.03 } : undefined}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={motionEnabled ? { scale: 1.05 } : undefined}
           >
             <Image
               src={coverImage}
@@ -84,7 +93,10 @@ export default function WorkCard({
           <p className="mt-3 text-sm leading-[1.7] text-muted">{outcome}</p>
           <div className="mt-5 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-muted">
             {tags.map((tag) => (
-              <span key={tag} className="rounded-full border border-muted2 px-3 py-1">
+              <span
+                key={tag}
+                className="rounded-full border border-muted2 px-3 py-1"
+              >
                 {tag}
               </span>
             ))}

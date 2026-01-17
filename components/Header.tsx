@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import Container from "./Container";
-import NavLink from "./NavLink";
-import MobileMenuOverlay from "./MobileMenuOverlay";
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
+import Container from './Container';
+import NavLink from './NavLink';
+import MobileMenuOverlay from './MobileMenuOverlay';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -15,16 +15,16 @@ export default function Header() {
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const updatePreference = () => setReduceMotion(mediaQuery.matches);
 
     updatePreference();
-    mediaQuery.addEventListener("change", updatePreference);
+    mediaQuery.addEventListener('change', updatePreference);
 
     return () => {
-      mediaQuery.removeEventListener("change", updatePreference);
+      mediaQuery.removeEventListener('change', updatePreference);
     };
   }, []);
 
@@ -38,7 +38,8 @@ export default function Header() {
 
     const updateScrollState = () => {
       const scrollTop = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = maxScroll > 0 ? Math.min(scrollTop / maxScroll, 1) : 0;
 
       setIsScrolled(scrollTop > 8);
@@ -54,46 +55,48 @@ export default function Header() {
     };
 
     updateScrollState();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, [reduceMotion]);
 
   useEffect(() => {
     const root = document.documentElement;
-    const page = document.getElementById("page-content");
+    const page = document.getElementById('page-content');
 
     if (open) {
-      root.classList.add("menu-open");
-      page?.setAttribute("aria-hidden", "true");
-      page?.setAttribute("inert", "");
-      headerRef.current?.setAttribute("aria-hidden", "true");
-      headerRef.current?.setAttribute("inert", "");
+      root.classList.add('menu-open');
+      page?.setAttribute('aria-hidden', 'true');
+      page?.setAttribute('inert', '');
+      headerRef.current?.setAttribute('aria-hidden', 'true');
+      headerRef.current?.setAttribute('inert', '');
     } else {
-      root.classList.remove("menu-open");
-      page?.removeAttribute("aria-hidden");
-      page?.removeAttribute("inert");
-      headerRef.current?.removeAttribute("aria-hidden");
-      headerRef.current?.removeAttribute("inert");
+      root.classList.remove('menu-open');
+      page?.removeAttribute('aria-hidden');
+      page?.removeAttribute('inert');
+      headerRef.current?.removeAttribute('aria-hidden');
+      headerRef.current?.removeAttribute('inert');
     }
   }, [open]);
 
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-[100] w-full border-b transition-all duration-200 ease-out motion-reduce:transition-none ${
+      className={`sticky top-0 z-[100] w-full border-b transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
         isScrolled
-          ? "border-black/10 bg-white/80 backdrop-blur-md"
-          : "border-transparent bg-white"
+          ? 'border-border/60 bg-bg/80 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-bg/60'
+          : 'border-transparent bg-bg/0'
       } relative`}
     >
       <Container
-        className={`flex items-center justify-between transition-[height] duration-200 ease-out motion-reduce:transition-none ${
-          isScrolled ? "h-14" : "h-16"
+        className={`flex items-center justify-between transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+          isScrolled
+            ? 'h-[var(--header-height-scrolled)]'
+            : 'h-[var(--header-height)]'
         }`}
       >
         <Link href="/" className="text-lg font-semibold tracking-tight">
@@ -124,7 +127,11 @@ export default function Header() {
         style={{ transform: `scaleX(${scrollProgress})` }}
         aria-hidden="true"
       />
-      <MobileMenuOverlay open={open} onClose={() => setOpen(false)} returnFocusRef={triggerRef} />
+      <MobileMenuOverlay
+        open={open}
+        onClose={() => setOpen(false)}
+        returnFocusRef={triggerRef}
+      />
     </header>
   );
 }

@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Container from "../components/Container";
-import Button from "../components/Button";
-import ServiceGrid from "../components/ServiceGrid";
-import WorkCard from "../components/WorkCard";
-import BlogRow from "../components/BlogRow";
-import { getAllPosts, getAllWorks } from "../lib/content";
+import Link from 'next/link';
+import Container from '../components/Container';
+import Button from '../components/Button';
+import ServiceGrid from '../components/ServiceGrid';
+import WorkCard from '../components/WorkCard';
+import BlogRow from '../components/BlogRow';
+import { getAllPosts, getAllWorks } from '../lib/content';
 
 function EfficiencyBadge() {
   return (
@@ -23,7 +23,13 @@ function EfficiencyBadge() {
           </div>
         </div>
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden>
-          <circle cx="14" cy="14" r="13" stroke="currentColor" strokeWidth="1" />
+          <circle
+            cx="14"
+            cy="14"
+            r="13"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
           <path d="M9 14h10M14 9v10" stroke="currentColor" strokeWidth="1" />
         </svg>
       </div>
@@ -34,40 +40,23 @@ function EfficiencyBadge() {
   );
 }
 
+import HeroSection from '../components/HeroSection';
+
 export default function HomePage() {
   const works = getAllWorks();
   const posts = getAllPosts();
 
   return (
     <main>
-      <section className="hero-surface">
-        <Container size="hero" className="py-24 sm:py-32 lg:py-36">
-          <div className="max-w-3xl">
-            <p className="upper-label">AI × Human Intelligence</p>
-            <h1 className="mt-6 text-5xl font-black leading-[0.85] tracking-tightest sm:text-6xl lg:text-7xl">
-              <span className="text-fg">LESS IS</span>
-              <br />
-              <span className="text-muted2">REVOLUTION.</span>
-            </h1>
-            <p className="mt-8 text-lg leading-[1.8] text-muted">
-              AI × Human Intelligence. 業務の代替ではなく、進化を。情報密度を削ぎ落とし、
-              速度と品質が共存するプロダクト体験を設計する。
-            </p>
-            <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center">
-              <Button href="/works" label="See our work" />
-              <p className="text-sm text-muted">For: Visionaries, Startups, & Minimalists.</p>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <HeroSection />
 
-      <section className="py-24 sm:py-32">
+      <section className="py-32 sm:py-40">
         <Container>
           <ServiceGrid />
         </Container>
       </section>
 
-      <section className="border-t border-border py-24 sm:py-32">
+      <section className="border-t border-border py-32 sm:py-40">
         <Container>
           <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
             <div>
@@ -94,21 +83,29 @@ export default function HomePage() {
             ))}
           </div>
           <div className="mt-10">
-            <Link href="/works" className="text-sm uppercase tracking-[0.3em] hover-underline">
+            <Link
+              href="/works"
+              className="text-sm uppercase tracking-[0.3em] hover-underline"
+            >
               View all works
             </Link>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-border py-24 sm:py-32">
+      <section className="border-t border-border py-32 sm:py-40">
         <Container>
           <div className="flex items-end justify-between">
             <div>
               <h2 className="section-title text-4xl">Blog.</h2>
-              <p className="mt-4 text-sm text-muted">思考の断片と技術的な覚書。</p>
+              <p className="mt-4 text-sm text-muted">
+                思考の断片と技術的な覚書。
+              </p>
             </div>
-            <Link href="/blog" className="text-sm uppercase tracking-[0.3em] hover-underline">
+            <Link
+              href="/blog"
+              className="text-sm uppercase tracking-[0.3em] hover-underline"
+            >
               Read all
             </Link>
           </div>
